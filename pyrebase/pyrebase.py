@@ -473,7 +473,10 @@ class Storage:
             if isinstance(file, str):
                 return blob.upload_from_filename(filename=file)
             else:
-                return blob.upload_from_file(file_obj=file)
+                request_object = self.requests.post(request_ref, data=file_object)
+                raise_detailed_error(request_object)
+                return request_object.json()
+                # return blob.upload_from_file(file_obj=file)
         else:
             request_object = self.requests.post(request_ref, data=file_object)
             raise_detailed_error(request_object)
