@@ -483,7 +483,7 @@ class Storage:
             return request_object.json()
 
     def delete(self, name, token):
-        if self.credentials:
+        if self.credentials != None:
             self.bucket.delete_blob(name)
         else:
             request_ref = self.storage_bucket + "/o?name={0}".format(name)
